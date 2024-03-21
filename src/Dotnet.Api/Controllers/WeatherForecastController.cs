@@ -1,3 +1,4 @@
+using Dotnet.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dotnet.Api.Controllers;
