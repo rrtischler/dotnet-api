@@ -1,11 +1,20 @@
+using Microsoft.OpenApi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "DotNet Api Experimentation",
+        Description = "Project to experiment with newer dotnet version and code patterns."
+    });
+});
 
 var app = builder.Build();
 
@@ -21,5 +30,10 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapGet("/fruit", () =>
+{
+    return Results.Ok("You should eat more fruits");
+}).WithTags("Get fruit");
 
 app.Run();
